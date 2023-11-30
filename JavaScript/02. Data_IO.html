@@ -1,0 +1,95 @@
+<!-- * 데이터 입.출력 * -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 입출력</title>
+    <style>
+        .area { border: 1px solid; }
+    </style>
+</head>
+<body>
+    <h1>자바스크립트의 데이터 입/출력</h1>
+
+    <pre>
+        * window : 자바스크립트 내장 객체. 브라우저 창이 열릴 때마다 하나씩 만들어지는 객체
+                    브라우저 창 안에 존재하는 모든 요소들의 최상위 객체(생략 가능)
+
+        * document : 웹 문서마다 하나씩 만들어지는 객체(HTML 문서에 대한 정보를 가짐)
+    </pre>
+
+    <h2>1. 데이터를 출력하는 구문</h2>
+    <p>
+        - [window.]alter("알림창에 출력할 문구"); <br>
+        - [window.]console.log("콘솔창에 출력할 문구"); <br>
+        - document.write("화면상에 출력할 문구"); <br>
+        - 선택한 요소.innerHTML | 선택한 요소.innerText = "요소에 출력할 문구"; <br>
+    </p>
+
+
+    <h3>document.write("화면상에 출력할 문구");</h3>
+
+    <button onclick="doWrite();">화면에 출력</button>
+
+    <script>
+        function doWrite() {
+            // document.write("화면에 메세지 출력할꺼임 ૮ ・ﻌ・ა");
+
+            // 출력할 문구에 HTML태그가 있을 경우 시각적인 요소로 보여줌
+            //document.write("<b>૮ ・ﻌ・ა 멍뭉이는 왈왈!</b> <br> <h2>화면에 메세지 출력할꺼임 ૮ ・ﻌ・ა</h2>");
+
+            // 변수 선언
+            // var dWrite = "<table border='1'><tr><td>HTML</td><td>CSS</td><td>JAVASCRIPT</td></tr></table>"
+            var dWrite = "<table border='1'>";
+                dWrite +=   "<tr>";
+                dWrite +=       "<td>HTML</td>";
+                dWrite +=       "<td>CSS</td>";
+                dWrite +=       "<td>JAVASCRIPT</td>";
+                dWrite +=   "</tr>";
+                dWrite += "</table>";
+            
+            // 화면에 출력(방법 1)
+            document.write(dWrite);
+
+            /*
+            // 출력(방법 2)
+            document.write("<table border='1'>"
+                                + "<tr>"
+                                    + "<td>HTML</td>"
+                                    + "<td>CSS</td>"
+                                    + "<td>JAVASCRIPT</td>"
+                                + "</tr>"
+                            + "</table>"); 
+            */
+        }
+    </script>
+
+    <br><br>
+
+
+    <h3>선택한 요소.innerHTML | 선택한 요소.innerText = "요소에 출력할 문구";</h3>
+
+    <div class="area" id="area1">
+        자바 스트립트에서 어떤 요소 안의 값을 가지고 오거나 변경하고자 할 때 
+        <b>innerHTML, innerText</b>라는 속성에 접근
+    </div>
+    <br>
+
+    <button onclick="tagValue();">확인</button>
+
+    <script>
+        function tagValue() {
+            // div 요소를 가져와 안에 있는 값을 확인/변경
+            // div 요소를 객체로 가져와서 변수에 저장
+            var divE1 = document.getElementById("area1");
+
+            // 해당 값에 대한 콘솔 log 출력
+            console.log(divE1);
+
+            // 해당 값의 dir(디렉토리) 구조 출력(속성들에 대한 모든 정보 포함)
+            console.dir(divE1); 
+        }
+    </script>
+</body>
+</html>
