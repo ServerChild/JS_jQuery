@@ -1,0 +1,58 @@
+<!-- * 회원가입 Form * -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+<body>
+    <form action="05. String_Number.html" method="post" name="regF">
+        <table border="1" width="400">
+            <tr>
+                <td colspan="2">회원가입</td>
+            </tr>
+            <tr>
+                <td width="30%">아이디</td>
+                <td width="70%"><input name="id" size="25"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type="password" name="pwd" size="25"></td>
+            </tr>
+            <tr>
+                <td>비밀번호 확인</td>
+                <td><input type="password" name="repwd" size="25"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="button" value="회원가입" onclick="inputCheck();">
+                    <input type="reset" value="초기화">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+    <script>
+        function inputCheck() {
+            let f = document.regF;
+            // 아이디가 비어있는지 비어있지 않은지 확인
+            if(f.id.value == "") {
+                alert("아이디를 입력해주세요!");
+                f.id.focus(); // focus : 입력해야되는 부분으로 커서를 맞춰줌
+                return;
+            }
+
+            if(f.pwd.value != f.repwd.value) {
+                alert("비밀번호가 다릅니다!");
+                f.repwd.value = "";
+                f.repwd.focus();
+                return;
+            }
+
+            f.submit();
+        }
+    </script>
+</body>
+</html>
