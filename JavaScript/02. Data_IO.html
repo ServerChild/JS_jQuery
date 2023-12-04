@@ -124,7 +124,7 @@
     <h3>1) [window.]confirm("질문내용");</h3>
     <p>
         confirm호출시 "질문내용"과 "확인/취소"버튼이 존재하는 알림창 발생 <br>
-        확인 버튼 클릭시 true, 취소 버튼 클릭시 false를 반환
+        확인 버튼 클릭시 true, 취소 버튼 클릭시 false를 반환(동의여부)
     </p>
 
     <button onclick="testConfirm();">클릭</button>
@@ -156,8 +156,8 @@
     <h3>2) [window.]pormpt("질문내용");</h3>
     <p>
         pormpt호출시 "질문내용"과 입력할 수 있는 "텍스트 상자"와 "확인/취소" 버튼이 보여지는 알림창 발생<br>
-        확인 버튼 클릭시 텍스트상자에 입력한 값이 문자열로 반환<br>
-        취소 버튼 클릭시 null반환
+            - 확인 버튼 클릭시 텍스트상자에 입력한 값이 문자열로 반환<br>
+            - 취소 버튼 클릭시 null반환
     </p>
 
     <button onclick="testPrompt();">클릭</button>
@@ -201,7 +201,7 @@
         */
 
         var str = "";
-        for(var i=1; i<=num; i++) {
+        for(var i = 1; i <= num; i++) {
         str += "<li>목록" + i + "</li>";
         }
 
@@ -211,8 +211,9 @@
     </script>
 
     <br>
-    
+
     <h3>4) 선택한input요소.value;</h3>
+    <!-- value="값" 속성을 지정해주면 입력창에 값이 출력됨 -->
     아이디 : <input type="text" id="userId"><br>
     비밀번호 : <input type="password" id="userPwd"><br>
 
@@ -229,6 +230,9 @@
 
         var id = input1.value;
         var pwd = input2.value;
+
+        // var area5 = document.getElementById("area5");
+        // area5.value = id + ", " + pwd;
 
         document.getElementById("area5").value = id + ", " + pwd;
     }
