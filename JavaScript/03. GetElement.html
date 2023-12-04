@@ -1,3 +1,4 @@
+<!-- * 요소 가져오기(접근) * -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,12 +206,31 @@
     <!-- div>(p.cla1>lorem)*3 -->
     <div>
         <p class="cla1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur, enim! Modi dolorum amet suscipit voluptatum, laborum, reiciendis maxime voluptate aperiam minima, non ipsa quos repellendus quas consequatur ut culpa eligendi.</p>
-        <p class="cla2">Laborum ut odio aperiam consectetur ea eligendi, perferendis dicta. Nihil enim voluptatibus illum consequuntur. Error ad amet repudiandae voluptate vel impedit ullam eligendi voluptatibus ut, itaque reiciendis animi cum sapiente.</p>
+        <p class="cla2" id="idp">Laborum ut odio aperiam consectetur ea eligendi, perferendis dicta. Nihil enim voluptatibus illum consequuntur. Error ad amet repudiandae voluptate vel impedit ullam eligendi voluptatibus ut, itaque reiciendis animi cum sapiente.</p>
         <p class="cla1">Ut esse maxime enim sequi, ratione quidem eaque eligendi blanditiis. Qui non quos natus, veritatis molestiae assumenda corrupti labore consectetur? Voluptatem ipsum impedit reiciendis praesentium nostrum corporis modi, vitae neque?</p>
     </div>
 
     <button onclick="select();">querySelector</button>
     <button onclick="selectAll();">querySelectorAll</button>
+
+    <script>
+        // 하나만 선택
+        function select() {
+            var p1 = document.querySelector(".cla2"); // class
+            // var p1 = document.querySelector("#idp"); // id
+
+            p1.style.color = "skyblue";
+        }
+
+        // 모두 선택
+        function selectAll() {
+            var p2 = document.querySelectorAll(".cla1");
+            
+            for(var i = 0; i < p2.length; i++) {
+                p2[i].style.color = "blue";
+            }
+        }
+    </script>
 
 </body>
 </html>
