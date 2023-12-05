@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            padding: 15px;
+            border-radius: 10px; 
+            background-color: lightblue; 
+        }
+
+        #add tr { height: 40px; }
+    </style>
+</head>
+<body>
+    <h1>회원 가입</h1>
+    
+    <fieldset>
+        <legend>필수 입력 사항</legend>
+
+    <form action=" " method="post" name="login">
+        <table>
+            <tr>
+                <th width=20%;>ID</th>
+                <td><input name="id" size="40" placeholder="아이디 10글자 이내"></td>
+                <td><input type="button" value="중복확인"></td>
+            </tr>
+            <tr>
+                <th width=20%;>비밀번호</th>
+                <td><input type="password" name="pwd" size="40" placeholder="영문, 숫자, 특수문자 포함 8자 이상"></td>
+            </tr>
+            <tr>
+                <th width=20%;>비밀번호 확인</th>
+                <td><input type="password" name="repwd" size="40"></td>
+            </tr>
+            <tr>
+                <th width=20%;>Email</th>
+                <td><input type="text" name="email" size="40"></td>
+                <td>
+                    <select name="emails" id="emails">
+                        <option value="eInput">직접 입력</option>
+                        <option value="eNaver">naver.com</option>
+                        <option value="eDaum">hanmail.net</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>추가 정보</legend>
+
+        <table id="add">
+            <tr id="pro">
+                <td width=100px;>프로필 사진 : </td>
+                <td width=50px;><input type="file" size="25"></td>
+            </tr>
+            <tr id="gen">
+                <td width=100px;>성별 : </td>
+                <td width=50px;><input type="radio" name="gender" value="M">남자
+                                <input type="radio" name="gender" value="F">여자</td>
+            </tr>
+            <tr id="bir">
+                <td width=100px;>생년월일 : </td>
+                <td width=50px;><input type="date" name="dateIn"></td>
+            </tr>
+            <tr id="hobby"> 
+                <td>취미<br>
+                    <input type="checkbox">야구
+                    <input type="checkbox">농구
+                    <input type="checkbox">축구<br>
+                    <input type="checkbox">공부
+                    <input type="checkbox">음악감상<br>
+                    <input type="checkbox">기타 : <input type="text"></td>
+            </tr>
+            <tr id="intro">
+                <td><br>자기소개<br>
+                    <textarea name="content" cols="50" rows="5"></textarea>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="회원가입" onclick="test();">
+                <input type="reset" value="다시입력">
+            </td>
+        </tr>
+    </form>
+
+    <script>
+        function test() {
+            let l = document.login;
+
+            if(l.pwd.value != l.repwd.value) {
+                alert("비밀번호가 틀립니다");
+                l.repwd.value = "";
+                l.repwd.focus();
+                return;
+            }
+            else {
+                alert("비밀번호가 일치합니다.");
+            }
+
+            l.submit();
+        }
+    </script>
+</body>
+</html>
