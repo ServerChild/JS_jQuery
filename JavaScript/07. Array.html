@@ -11,6 +11,7 @@
             border: 1px solid;
             padding: 5px;
             margin-top: 5px;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -58,8 +59,6 @@
 
     <button onclick="arrayTest2();">확인</button>
 
-    <div id="area2" class="area"></div>
-
     <script>
         function arrayTest2() {
             const arr1 = new Array(); // 개수 지정 안해도 됨
@@ -89,7 +88,92 @@
 
             console.log(arr4);
             console.log(arr5);
+        }
+    </script>
 
+    <hr>
+
+
+    <h3>* 배열 관련 메소드</h3>
+    <h4>1) 배열.indexOf(찾고자하는 요소)</h4>
+    <p>배열에서 해당하는 요소가 위치해있는 인덱스 반환</p>
+
+    <div id="area2" class="area"></div>
+
+    <button onclick="indexOfTest();">확인</button>
+
+    <script>
+        function indexOfTest() {
+            const area2 = document.querySelector("#area2");
+
+            const arr = ['사과', '딸기', '포도', '귤', '복숭아'];
+            const fruit = prompt("찾고자하는 과일 입력하세요.");
+
+            const index = arr.indexOf(fruit);
+            console.log(index);
+
+            if(index == -1) {
+                area2.innerHTML = `당신이 찾는 과일 ${fruit}는 판매하지 않습니다.`;
+            }
+            else {
+                area2.innerHTML = `당신이 찾는 과일 ${fruit}는 ${index}번 인덱스에 있습니다.`;
+            }
+
+
+            // 자바스크립트에서의 동등 비교
+            // == : 값만 비교
+            // 동등비교연산자 : 자료형과 무관하게 실제값만 일치해도 true
+            console.log(1 == 1); //true
+            console.log(1 == '1'); //true
+
+            // === : 값 + 자료형 비교
+            // 엄격비교연산자 : 값과 자료형 둘다 일치해야 true
+            console.log(1 === 1); // true
+            console.log(1 === '1'); // false
+        }
+    </script>
+
+    <hr>
+
+    <h4>2) 배열.concat(배열, 배열, ...)</h4>
+    <p>배열 여러개를 결합하고자 할 때 사용</p>
+
+    <div id="area3" class="area"></div>
+
+    <button onclick="concatTest();">확인</button>
+
+    <script>
+        function concatTest() {
+            const area3 = document.getElementById("area3");
+
+            const arr1 = ['사과', '딸기', '포도'];
+            const arr2 = ['버스', '기차', '오토바이'];
+
+            // 배열 전체 출력
+            area3.innerHTML = `arr1 : ${arr1} <br>`;
+            area3.innerHTML += `arr2 : ${arr2} <br>`;
+            area3.innerHTML += arr1 + '/'+ arr2 + `<br><br>`; // 배열 두개가 이어서 출력
+
+            // 배열 두개를 하나로 결합
+            area3.innerHTML += `arr1을 기준으로 배열 합침 : ${arr1.concat(arr2)} <br>`;
+            area3.innerHTML += `원본 arr1 : ${arr1} <br><br>`;
+
+            area3.innerHTML += `arr2를 기준으로 배열 합침 : ${arr2.concat(arr1)} <br>`;
+        }
+    </script>
+
+    <hr>
+
+    <h4>3) 배열.reverse</h4>
+    <p>배열에 담긴 값들을 역순으로 바꿔주는 함수</p>
+
+    <div id="area4" class="area"></div>
+
+    <button onclick="reverseTest();">확인</button>
+
+    <script>
+        function reverseTest() {
+            
         }
     </script>
 
