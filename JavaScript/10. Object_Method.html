@@ -1,0 +1,140 @@
+<!-- * 객체 메소드 * -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 메소드</title>
+    <style>
+        .area { 
+            border: 1px solid;
+            padding: 5px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .small{ height: 100px; }
+        .big { height: 300px; }
+    </style>
+</head>
+<body>
+    <h3>* 객체 메소드 속성</h3>
+    <p>객체의 속성 중 함수 자료형인 속성을 메소드라고 부름</p>
+
+    <div id="area1" class="area big"></div>
+
+    <button onclick="test1();">확인</button>
+
+    <script>
+        function test1() {
+            const area1 = document.getElementById('area1');
+
+            let name = "jenny"; // 변수
+
+            const dog = {
+                name : "똥개",
+                kind : "시고로브잡종", // 객체를 정의할 때 쓰는 키
+                eat : function(food) {
+                    area1.innerHTML += 'eat 메소드가 호출됨 <br>';
+                    area1.innerHTML += `${food} <br>`;
+
+                    // 가지고 있는 값을 가져오려면 'this.키명' 으로 출력해야 함
+                    // area1.innerHTML += `종류가 ${kind}인 ${name}이가 ${food}를 먹고 있다. <br>`; -> 오류
+                    area1.innerHTML += `종류가 ${this.kind}인 ${this.name}가 ${food}를 먹고 있다. <br>`;
+                }
+            }
+
+            dog.eat("사료"); // 매개변수
+
+            area1.innerHTML += "======================== <br>";
+
+            let age = 25;
+
+            // ES5
+            const p1 = {
+                name : name,
+                age : age,
+                fun1 : function() {
+                    const result = this.name.toUpperCase();
+
+                    area1.innerHTML += `이름 : ${result}!!! <br>`
+                },
+                setAge : function(vAge) {
+                    this.age = vAge;
+
+                    area1.innerHTML += `나이 : ${this.age} <br>`;
+                }
+            }
+
+            p1.fun1();
+            p1.setAge(10);
+
+            // ES6(2015) 이후에 많이 바뀜
+            // 키명이 같으면 한번만 써줌
+            const p2 = {
+                name,
+                age,
+                fun1() {
+                    const result = this.name.toUpperCase();
+
+                    area1.innerHTML += `이름 : ${result}!!! <br>`
+                },
+                setAge(vAge) {
+                    this.age = vAge;
+
+                    area1.innerHTML += `나이 : ${this.age} <br>`;
+                }
+            }
+            
+            p2.fun1();
+            p2.setAge(30);
+        }
+    </script>
+
+    <br><br>
+
+    <h3>* in 과 with 키워드</h3>
+    <p>
+        - in : 객체 내에 해당 속성이 있는지 확인해주는 키워드(존재하면 true, 없으면 false) <br>
+        - with : 객체 속성에 접근할 때 객체명을 생략할 수 있는 키워드(코드를 줄여주는 키워드) <br>
+    </p>
+
+    이름 : <input id="name"> <br>
+    국어 : <input type="number" id="kor"> <br>
+    수학 : <input type="number" id="math"> <br>
+    영어 : <input type="number" id="eng"> <br>
+
+    <div id="area2" class="area"></div>
+    
+    <button onclick="test2()">확인</button>
+
+    <script>
+        function test2() {
+            const area2 = document.querySelector('#area2');
+
+            const student = {
+                name : document.getElementById("name").value,
+                kor : Number(document.querySelector('#kor').value),
+                math : Number(document.querySelector('#math').value),
+                eng : Number(document.querySelector('#eng').value),
+                // toString : function() {
+                //                 return "안녕";
+                //             }
+            }
+
+            area2.innerHTML = `name속성이 있는가? ${"name" in student} <br>`;
+            area2.innerHTML += `age속성이 있는가? ${"age" in student} <br>`;
+            
+            area2.innerHTML += `학생이름 : ${student.name} <br>`;
+            area2.innerHTML += `국어점수 : ${student.kor} <br>`;
+            area2.innerHTML += `수학점수 : ${student.math} <br>`;
+            area2.innerHTML += `영어점수 : ${student.eng} <br>`;
+
+            area2.innerHTML += `총점 : ${student.kor + student.math + student.eng} <br>`;
+            area2.innerHTML += `평균 : ${(student.kor + student.math + student.eng)/3} <br>`;
+
+        }
+
+    </script>
+
+</body>
+</html>
