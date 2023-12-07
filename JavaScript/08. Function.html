@@ -129,6 +129,7 @@
             console.log('IIFE 실행');
         })();
 
+        // 즉시 실행 함수
         (function(name) {
             console.log(`${name}`);
             
@@ -136,8 +137,16 @@
             console.log(k);
         })('Hi');
 
-        // 화살표 함수로 바꾸기
+        // 즉시 실행 함수를 화살표 함수로 바꾸기(값 1개)
         ((name) => console.log(`${name}`))('Hi');
+
+        // 즉시 실행 함수를 화살표 함수로 바꾸기(값 여러개)
+        (name => {
+            console.log(`${name}`);
+            
+            const k = 999;
+            console.log(k);
+        })('Hi');
 
     </script>
 
@@ -170,5 +179,155 @@
         }
     </script>
 
+    <br><br>
+
+    <h3>* 매개변수 관련 arguments 배열</h3>
+    <p>
+        - 함수 호출시 전달되는 값은 내부적으로 arguments 배열에 담김
+        - arguments : 모든 함수마다 내부적으로 하나씩 존재하는 배열 객체
+    </p>
+
+    <div id="area5" class="area"></div>
+
+    <button onclick="test3(4, 25, 34, 3, 8)">확인</button>
+
+    <script>
+        function test3() {
+            console.log(arguments);
+            console.log(arguments[0]);
+
+            const area5 = document.querySelector('#area5');
+
+            // 배열 요소들의 합계
+            let sum = 0;
+
+            // for of : 배열에서 요소를 하나씩 가져와서 합함(반복문)
+            for(let i of arguments) {
+                sum += i;
+            }
+
+            area5.innerHTML += `총합 : ${sum} <br>`;
+            area5.innerHTML += `평균 : ${sum/arguments.length} <br>`;
+        }
+    </script>
+
+    <br><br>
+
+    <h3>* 매개변수에 this관련 전달하기</h3>
+    <p>this : 현재 이벤트가 발생한 요소 객체</p>
+
+    <!-- this : button태그 자체를 요소(객체)로 가져옴(전체)) -->
+    <button onclick="test5(this)">버튼1</button>
+
+    <!-- this.innerHTML : button태그 내에 있는 값을 가져옴 -->
+    <button onclick="test5(this.innerHTML);">버튼2</button>
+
+    <!-- this.value : input태그 내에 value 값을 가져옴 -->
+    <input type="button" value="버튼3" onclick="test5(this.value);">
+
+    <!-- this.id : button태그 내에 id값을 가져옴 -->
+    <button id="btn4" onclick="test5(this.id);">버튼4</button>
+
+    <script>
+        function test5(a) {
+            console.log(a);
+        }
+    </script>
+
+    <br><br>
+
+    <!-- button "클릭"을 누르면 "클릭됨" + 색(skyblue)으로 변경됨 -->
+    <button onclick="test6(this)">클릭</button>
+
+    <script>
+        function test6(object) {
+            object.style.backgroundColor = "skyblue";
+            object.innerHTML = "클릭됨";
+        }
+    </script>
+
+    <hr>
+
+
+    <h2>함수의 리턴</h2>
+
+    <h3>* 일반적인 값</h3>
+
+    <div id="area6" class="area"></div>
+
+    <button onclick="test7();">확인</button>
+
+    <script>
+        // 버튼 클릭시 실행되는 함수
+        function test7() {
+            document.querySelector("#area6").innerHTML = `랜덤값 : ${random()}`;
+        }
+
+        // 랜덤으로 숫자 출력 : 1 ~ 100
+        function random() {
+            const random = parseInt(Math.random() * 100 + 1);
+
+            return random;
+        }
+    </script>
+
+    <!-- 버튼을 누르면 console에 랜덤 숫자가 출력됨 -->
+    <button onclick="console.log(random());">클릭(콘솔)</button>
+
+    <br><br>
+
+    <h3>* 익명함수 리턴</h3>
+
+    이름 : <input id="userName">
+    <button onclick="test8()();">확인</button>
+
+    <script>
+        function test8() {
+            var inputOb = document.querySelector("#userName");
+
+            // 사용자가 넣은 값만 콘솔 로그 출력
+            // console.log(inputOb.value);
+
+            // function을 가지는 별도의 괄호()를 선언해줘야 실행이 가능해짐
+            // onclick의 함수에서 괄호() 중 두번째 괄호에서 실행
+            // return에 함수를 넣어줄 때 사용
+            return function() {
+                alert(inputOb.value);
+            }
+        }
+    </script>
+
+    <br><br>
+
+    <h3>* 화살표 함수의 리턴</h3>
+    <p>본문이 하나일 때 : x => { return 값 } or x => return 값(괄호 생략 가능)</p>
+
+    <div id="area7" class="area"></div>
+    
+    <button onclick="test9();">확인</button>
+
+    <script>
+        function test9() {
+            document.getElementById('area7').innerHTML = `화살표 함수 실행 : ${eFun()}<br>`;
+            document.getElementById('area7').innerHTML += `화살표 함수 실행(매개변수) : ${eFun2(10)}<br>`;
+            document.getElementById('area7').innerHTML += `매개변수 2개 & 한줄 : ${eFun3(3, 5)}<br>`;
+        }
+
+        // 익명함수를 화살표함수를 사용해 변수로 선언함(매개변수 없음)
+        let eFun = () => {
+            let result = 5 * 7;
+            return result;
+        }
+
+        // 매개변수 value를 입력받아 value * 2의 결과를 출력
+        // let eFun2 = value => {
+        //     let result = value * 2;
+        //     return result;
+        // }
+        let eFun2 = value => value * 2; // 한줄 작성
+
+        // 매개변수 2개 & 한줄 작성, 출력값이 1개라면 괄호 생략 가능
+        let eFun3 = (num1, num2) => num1 * num2;
+    </script>
 </body>
 </html>

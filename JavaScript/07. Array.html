@@ -30,6 +30,7 @@
 
     <script>
         function arrayTest1() {
+            // 배열 선언 후 할당
             const arr = ['홍길동', '서울', 20, true, [1, 2, 3]];
 
             console.log(arr);
@@ -112,6 +113,7 @@
             const index = arr.indexOf(fruit);
             console.log(index);
 
+            // 해당하는 index가 없을 경우 -1 반환함
             if(index == -1) {
                 area2.innerHTML = `당신이 찾는 과일 ${fruit}는 판매하지 않습니다.`;
             }
@@ -212,7 +214,7 @@
             area5.innerHTML += `원본 arr : ${arr} <br>`;
             area5.innerHTML += `원본 name : ${name} <br><br>`;
 
-            // 내림차순 정렬
+            // 내림차순 정렬 -> sort로 오름차순 정렬을 한 후 reverse로 역순 출력
             area5.innerHTML += `arr 내림차순 정렬 : ${arr.sort().reverse()} <br>`;
             area5.innerHTML += `name 내림차순 정렬 : ${name.sort().reverse()} <br>`;
         }
@@ -397,7 +399,7 @@
 
             // 배열에 요소 가져오기
             area10.innerHTML += 'for of : ';
-            for(let ch in arr) {
+            for(let ch of arr) {
                 area10.innerHTML += `${ch} `;
             }
             area10.innerHTML += '<br>';
@@ -436,7 +438,8 @@
             const arr = [1, 2, 3, 4, 5];
 
             // 콜백함수 : function(요소(값), 인덱스, 배열) {}
-            const arr2 = arr.map(function(value, index, arr) {
+            // value값만 사용하기 때문에 index, arr은 생략 가능
+            const arr2 = arr.map(function(value /*, index, arr */) {
                 // console.log(value, index, arr);
                 return value * value;
             });
@@ -461,6 +464,7 @@
             // }
 
             // Map - 요소만 가져옴
+            // 출력 : [<li>이길동</li>, <li>박길동</li>, <li>허길동</li>]
             const nameList = names.map(function(name) {
                 return `<li>${name}</li>`;
             });
@@ -493,8 +497,8 @@
             // 1 ~ 100까지의 숫자 출력
             const arr = new Array();
 
-            for(let i = 0; i < 100; i++) {
-                arr.push(i + 1);
+            for(let i = 1; i <= 100; i++) {
+                arr.push(i);
             }
 
             console.log(arr);
@@ -512,6 +516,7 @@
             const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
             // 콜백함수 : function(이전 값(기본값 0) , 현재 값, 인덱스, 배열) {}
+            // 이전 값 = 실행했을 때 들어오는 return된 값
             const sum = nums.reduce(function(pv, element, index, arr) {
                 return pv + element;
             });
