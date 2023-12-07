@@ -20,7 +20,7 @@
     <h3>* 객체 메소드 속성</h3>
     <p>객체의 속성 중 함수 자료형인 속성을 메소드라고 부름</p>
 
-    <div id="area1" class="area big"></div>
+    <div id="area1" class="area small"></div>
 
     <button onclick="test1();">확인</button>
 
@@ -94,7 +94,7 @@
 
     <h3>* in 과 with 키워드</h3>
     <p>
-        - in : 객체 내에 해당 속성이 있는지 확인해주는 키워드(존재하면 true, 없으면 false) <br>
+        - in : 객체에 해당 속성이 있는지 확인해주는 키워드(존재하면 true, 없으면 false) <br>
         - with : 객체 속성에 접근할 때 객체명을 생략할 수 있는 키워드(코드를 줄여주는 키워드) <br>
     </p>
 
@@ -116,12 +116,24 @@
                 kor : Number(document.querySelector('#kor').value),
                 math : Number(document.querySelector('#math').value),
                 eng : Number(document.querySelector('#eng').value),
-                // toString : function() {
-                //                 return "안녕";
-                //             }
+                getSum : function() {
+                    return this.kor + this.math + this.eng;
+                },
+                getAvg : function() {
+                    // return Math.round(this.getSum() / 3 * 10) / 10; // 소수점 첫째 자리까지 출력
+                    // .toFixed(자리수) : 소수점 자리수까지 출력
+                    return (this.getSum()/3).toFixed(1);
+                },
+                toString : function() {
+                    // return "안녕";
+                    return `이름 : ${this.name} / 국어 : ${this.kor} / 수학 : ${this.math} / 영어 : ${this.eng} <br>`;
+                }
             }
 
-            area2.innerHTML = `name속성이 있는가? ${"name" in student} <br>`;
+            area2.innerHTML = `${student} <br>`; // toString에 정의한 내용이 출력됨
+
+            // in : 객체에 해당 속성이 있는지 확인
+            area2.innerHTML += `name속성이 있는가? ${"name" in student} <br>`;
             area2.innerHTML += `age속성이 있는가? ${"age" in student} <br>`;
             
             area2.innerHTML += `학생이름 : ${student.name} <br>`;
@@ -129,12 +141,66 @@
             area2.innerHTML += `수학점수 : ${student.math} <br>`;
             area2.innerHTML += `영어점수 : ${student.eng} <br>`;
 
-            area2.innerHTML += `총점 : ${student.kor + student.math + student.eng} <br>`;
-            area2.innerHTML += `평균 : ${(student.kor + student.math + student.eng)/3} <br>`;
+            area2.innerHTML += `총점 : ${student.getSum()} <br>`;
+            area2.innerHTML += `평균 : ${student.getAvg()} <br>`;
 
+            area2.innerHTML += "======================== <br>";
+
+            // with : 객체명 생략
+            with(student) {
+                area2.innerHTML += `학생이름 : ${name} <br>`;
+                area2.innerHTML += `국어점수 : ${kor} <br>`;
+                area2.innerHTML += `수학점수 : ${math} <br>`;
+                area2.innerHTML += `영어점수 : ${eng} <br>`;
+
+                area2.innerHTML += `총점 : ${getSum()} <br>`;
+                area2.innerHTML += `평균 : ${getAvg()} <br>`;
+            }
         }
-
     </script>
+
+    <br><br>
+
+    <!-- 대량의 데이터를 관리할 때 객체를 사용 -->
+    <h3>* 객체의 속성 추가 및 제거</h3>
+
+    <div id="area3" class="area small"></div>
+
+    <button onclick="test3();">확인</button>
+
+    <script>
+        function test3() {
+            const area3 = document.getElementById('area3');
+
+            const people = {}; // 빈 객체 생성
+
+            // 객체의 속성 추가
+            people.name = "아무개";
+            people.hobby = ["게임", "운동"];
+            people.dream = "돈많은 백수";
+            people.age = 20;
+
+            // 속성 변경(덮어쓰기)
+            people.dream = "건물주";
+            console.log(people);
+
+            // 메소드 추가
+            people.toString = function() {
+                return `name : ${this.name} <br>
+                        hobby : ${this.hobby} <br>
+                        dream : ${this.dream} <br>
+                        age : ${this.age} <br>`;
+            }
+
+            area3.innerHTML += people;
+
+            // 객체의 속성 제거
+            delete(people.hobby);
+            area3.innerHTML += '<hr>';
+            area3.innerHTML += people;
+        }
+    </script>
+
 
 </body>
 </html>
