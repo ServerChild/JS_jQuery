@@ -21,6 +21,7 @@
 
             let ReExp_Id = /^[a-z][a-z0-9]{3, 11}$/i;
 
+            // ReExp_Id.test(userId) ? alert('ID 입력 성공') : alert('ID 형식이 틀립니다.');
             if(ReExp_Id.test(userId)) {
                 alert('ID 형식이 틀립니다.');
                 return false;
@@ -32,12 +33,10 @@
 
             // const ReExp_Pw = /^[a-z0-9].{7, 19}/i;
 
+            // ReExp_Pw.test(userPw) ? alert('PW 입력 성공') : alert('PW 형식이 틀립니다.');
+
             // // 비밀번호 = 비밀번화 확인 같은지 체크
             // const userRePw = document.querySelector('#userRePw').value;
-
-            // ReExp_Id.test(userId) ? alert('ID 입력 성공') : alert('ID 형식이 틀립니다.');
-
-            // ReExp_Pw.test(userPw) ? alert('PW 입력 성공') : alert('PW 형식이 틀립니다.');
 
             // if(userPw != userRePw) {
             //     alert('비밀번호가 틀립니다.');
