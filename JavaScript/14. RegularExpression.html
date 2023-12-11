@@ -6,11 +6,312 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>정규표현식</title>
     <style>
-        .area { border: 1px solid; }
+        .area { 
+            border: 1px solid;
+            margin-top: 5px;
+         }
     </style>
 </head>
 <body>
     <h1>정규표현식</h1>
-    <h3>* 정규형식 객체 생성 및 </h3>
+    <h3>* 정규형식 객체 생성 및 정규표현식과 관련된 메소드</h3>
+
+    <button onclick="test1();">확인</button>
+
+    <div id="area1" class="area"></div>
+
+    <script>
+        function test1() {
+            const area1 = document.querySelector('#area1');
+
+            const str1 = "javascript jquery ajax";
+            const str2 = "java oracle html css";
+
+            // 정규표현식 객체 생성 = 정규식 변수 선언
+            // -> 검색 조건으로 하고자하는 문자열 또는 특정패턴을 만듬
+
+            // 방법 1 : new를 통한 객체 생성
+            const reExp = new RegExp("script");
+
+            // 방법 2 : /검색조건 문자열 or 특정패턴/ -> 앞뒤 슬래쉬(/)
+            const reExp2 = /script/;
+
+            console.log(reExp);
+            console.log(reExp2);
+
+            /*
+                * RegExp 객체에서 제공하는 함수 -> 정규식.xxx(문자열)
+                   - 정규식.test(문자열) : 문자열에서 정규식값과 일치하는 값이 있으면 true 반환
+                   - 정규식.exec(문자열) : 문자열에서 정규식값과 일치하는 값이 있으면 처음 매칭된 문자열 반환, 없으면 null
+
+                * String 객체에서 제공하는 함수 -> 문자열.xxx(정규식)
+                   - 문자열.match(정규식) : 문자열에서 정규식과 일치하는 값을 찾아서 반환
+                   - 문자열.search(정규식) : 문자열에서 정규식과 일치하는 값의 시작 인덱스값 반환, 없으면 -1
+                   - 문자열.replace(정규식, 바꿀값) : 문자열에서 정규식과 일치하는 첫번째 값을 바꿀 값으로 변경하여 반환
+                   - 문자열.split(정규식) : 정규식에 지정된 값을 구분자를 사용해 쪼개진 값들이 들어있는 배열 반환
+
+            */
+
+            // RegExp객체 제공 함수 //
+            // 정규식.test(문자열) : 문자열에서 정규식값과 일치하는 값 유무
+            area1.innerHTML += `reExp.test(str1) : ${reExp.test(str1)} <br>`;
+            area1.innerHTML += `reExp.test(str2) : ${reExp.test(str2)} <br><br>`;
+
+            // 정규식.exec(문자열) : 문자열에서 정규식값과 일치하는 문자열 출력, 없으면 null
+            area1.innerHTML += `reExp.exec(str1) : ${reExp.exec(str1)} <br>`;
+            area1.innerHTML += `reExp.exec(str2) : ${reExp.exec(str2)} <br><br>`;
+
+            
+            // String객체 제공 함수 //
+            // 문자열.match(정규식) : 문자열에서 정규식과 일치하는 값 찾아 출력
+            area1.innerHTML += `str1.match(reExp) : ${str1.match(reExp)} <br>`;
+            area1.innerHTML += `str2.match(reExp) : ${str2.match(reExp)} <br><br>`;
+
+            // 문자열.search(정규식) : 문자열에서 정규식과 일치하는 값 시작인덱스 번호 출력
+            area1.innerHTML += `str1.search(reExp) : ${str1.search(reExp)} <br>`;
+            area1.innerHTML += `str2.search(reExp) : ${str2.search(reExp)} <br><br>`;
+
+            // 문자열.replace(정규식, 바꿀값) : 문자열에서 정규식과 일치하는 문자 바꾼 후 출력
+            area1.innerHTML += `str1.replace(reExp, '스크립트') : ${str1.replace(reExp, '스크립트')} <br><br>`;
+            
+            // 문자열.split(정규식) : 정규식에 지정된 값을 구분자로 쪼개서 배열에 담아 출력
+            area1.innerHTML += `str1.split(reExp) : ${str1.split(reExp)} <br>`;
+        }
+    </script>
+
+    <hr>
+
+
+    <h3>* 메타문자</h3>
+    <p>
+        메타문자를 이용하여 정규식으로 검색조건으로 할 "특정패턴" 제시 <br>
+            문자열이 해당 정규식으로 제시한 특정패턴에 만족하는지 <br>
+              > test()를 통해 검사하거나 <br>
+              > replace()를 이용하여 치환 가능
+    </p>
+
+    <button onclick="test2();">확인</button>
+
+    <div id="area2" class="area"></div>
+
+    <script>
+        function test2() {
+            const area2 = document.getElementById('area2');
+
+            const str = "javascript jquery ajax";
+
+            let reExp = /a/;
+
+            area2.innerHTML += `/a/ : ${reExp.test(str)} <br>`;
+
+            // 일치하는 값 중 첫번째 값만 대체
+            area2.innerHTML += `/a/ : ${str.replace(reExp, "(*)")} <br><br>`;
+
+            // 1. ^ : 시작의미
+            reExp = /^j/;
+            area2.innerHTML += `/^j/ : ${reExp.test(str)} <br>`;
+            area2.innerHTML += `/^j/ : ${str.replace(reExp, '(**)')} <br><br>`;
+
+            // 값을 찾을 때 단어 단위로 따지지 않기 때문에 적용 x
+            reExp = /^a/;
+            area2.innerHTML += `/^a/ : ${reExp.test(str)} <br>`;
+            area2.innerHTML += `/^a/ : ${str.replace(reExp, '*')} <br><br>`;
+
+
+            // 2. [] : []내에 여러 문자들을 목록처럼 나열 가능
+            reExp = /[abc]/;
+            area2.innerHTML += `/[abc]/ : ${reExp.test(str)} <br>`;
+            area2.innerHTML += `/[abc]/ : ${str.replace(reExp, '*')} <br><br>`;
+
+            // j 또는 s 또는 a 로 시작
+            reExp = /^[jsa]/;
+            area2.innerHTML += `/^[jsa]/ : ${reExp.test(str)} <br>`;
+            area2.innerHTML += `/^[jsa]/ : ${str.replace(reExp, '*')} <br><br>`;
+
+
+            // 3. $ : 끝 의미
+            reExp = /x$/;
+            area2.innerHTML += `/x$/ : ${reExp.test(str)} <br>`;
+            area2.innerHTML += `/x$/ : ${str.replace(reExp, '*')} <br><br>`;
+
+
+            // 시작은 j이고 끝은 x인지 확인
+            // 이 패턴에 만족하는 문자열은 'jx'만 해당함. 중간에 글씨가 있어서 false
+            reExp = /^jx&/;
+            area2.innerHTML += `/^jx&/ : ${reExp.test(str)} <br>`;
+            area2.innerHTML += `/^jx&/ : ${reExp.test('jx')} <br><br>`;
+
+
+            // 4. . : 개행문자를 제외한 모든 문자(영문자, 숫자, 한글, 특수기호)
+            // 5. + : 한글자 이상
+            //   .+ : 개행문자를 제외한 한글자 이상의 문자인 경우
+            reExp = /^j.+x$/;
+            area2.innerHTML += `/^j.+x$/ : ${reExp.test(str)} <br>`;
+            area2.innerHTML += `${reExp} : ${str.replace(reExp, '*')} <br><br>`;
+
+            // 숫자로만 이루어져 있어야 함
+            // 숫자로 시작하고 숫자로 이루어지며 한글자 이상이여야 함
+            reExp = /^[0-9]+$/;
+            area2.innerHTML += `${reExp} : ${reExp.test('37424673')} <br>`;
+            area2.innerHTML += `${reExp} : ${reExp.test('37skd#%$34')} <br><br>`;
+
+            // 오로지 영문자로만 이루어짐. 단, 적어도 한글자 이상
+            reExp = /^[a-zA-Z]+$/;
+            area2.innerHTML += `${reExp} : ${reExp.test('QWRasdfsQ')} <br>`;
+            area2.innerHTML += `${reExp} : ${reExp.test('QWRa-sdfsQ')} <br><br>`;
+
+            // 오로지 한글로만 이루어짐. 단, 적어도 한글자 이상
+            reExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
+            area2.innerHTML += `${reExp} : ${reExp.test('안녕ㅋㅋㅠㅠ')} <br>`;
+
+            // 오로지 한글로만 이루어짐(조합완성형). 단, 적어도 한글자 이상
+            reExp = /^[가-힣]+$/;
+            area2.innerHTML += `${reExp} : ${reExp.test('안녕')} <br>`;
+            area2.innerHTML += `${reExp} : ${reExp.test('안녕ㅋㅋㅠㅠ')} <br><br>`;
+
+            // 사용자로부터 이름을 입력받아, 한글조합형만 가능하고 2글자 이상
+            reExp = /^[가-힣]{2,}$/;
+            const name = prompt("이름 입력(한글만)");
+
+            reExp.test(name) ? alert('반갑습니다.') : alert('유효한 형식의 이름이 아닙니다.');
+        }
+    </script>
+
+    <hr>
+
+
+    <h3>* 플래그 문자</h3>
+    <p>
+        i : 대소문자를 가리지 않고 비교를 수행 <br>
+        g : 전역으로 비교를 수행 <br>
+        m : 여러 줄을 비교 수행
+    </p>
+
+    <!-- 영문자 또는 숫자로만 입력하여 비교 -->
+    <button onclick="test3();">i 실행확인</button>
+
+    <script>
+        function test3() {
+            // 1. 영문자 또는 숫자로만 이루어져야 함
+            //  단, 첫글자는 무조건 영문자여야 함
+            // const reExp = /^[a-zA-Z][a-zA-Z0-9]+$/;
+            
+            // i : 대소문자 가리지 않고 영문자이면 o
+            reExp = /^[a-z][a-z0-9]+$/i;
+            const value = prompt('영문자나 숫자 입력');
+            reExp.test(value) ? alert('입력 성공') : alert('유효한 형식이 아닙니다.');
+        }
+    </script>
+
+    <!-- 입력한 문자열 확인 -->
+    <button onclick="test4();">g 실행확인</button>
+
+    <div id="area3" class="area"></div>
+
+    <script>
+        function test4() {
+            const area3 = document.getElementById('area3');
+
+            const str = "javascript jQuery Ajax";
+
+            let reExp = /a/;
+            area3.innerHTML += `${reExp} : ${str.replace(reExp, '*')} <br>`;
+
+            // g : 해당하는 문자열에 있는 모든 값 해당
+            reExp = /a/g;
+            area3.innerHTML += `${reExp} : ${str.replace(reExp, '*')} <br>`;
+
+            // ig : 해당하는 문자열에 있는 모든 값 해당(대소문자 구분 x)
+            reExp = /a/ig;
+            area3.innerHTML += `${reExp} : ${str.replace(reExp, '*')} <br>`;
+
+            const str2 = "javascript\njQuery\nAjax";
+            console.log(str2);
+
+            // \n은 무시
+            reExp = /^j/;
+            console.log(`${reExp} : ${str2.replace(reExp, '*')} <br>`);
+
+            // 전역은 여러줄 비교 x
+            reExp = /^j/g;
+            console.log(`${reExp} : ${str2.replace(reExp, '*')} <br>`);
+
+            // m : 여러줄 비교
+            // gm : 여러줄을 비교할 때 사용
+            reExp = /^j/gm;
+            console.log(`${reExp} : ${str2.replace(reExp, '*')} <br>`);
+        }
+    </script>
+
+    <hr>
+
+
+    <h3>* 정규식을 가지고 주민번호 확인</h3>
+
+    주민 번호 : <input id="pNo" placeholder="123456-1234567">
+
+    <button onclick="test5();">확인</button>
+
+    <script>
+        function test5() {
+            const value = document.getElementById('pNo').value;
+
+            // 1단계 : 글자 수만 확인. 숫자 비교 x
+            // const reExp = /^......-.......$/;
+
+            // reExp.test(value) ? alert('정상입력') : alert('잘못입력');
+
+            // 2단계 : 숫자 6개 - 숫자 7개
+            /*
+                . : 개행문자를 제외한 모든 문자 1개
+                \d : 숫자만
+                \D : 숫자를 제외한 모든 문자
+
+                \w : 영문자, 숫자, 언더바(_)만
+                \W : 영문자, 숫자, 언더바(_)를 제외한 나머지 문자
+
+                \s : 공백문자(띄어쓰기, 탭, 줄바꿈)만
+                \S : 공백문자를 제외한 모든 문자
+
+                - 수량 문자 -
+                    + : 1글자 이상
+                    * : 0글자 이상
+                    ? : 0글자 또는 1글자
+
+                    {숫자} : 해당하는 숫자만큼의 글자
+                    {숫자1, 숫자2} : 숫자1 ~ 숫자2만큼의 글자 
+                    {숫자1, } : 숫자1 이상의 글자
+                    {,숫자2} : 최대 숫자2만큼의 글자
+            */
+            // reExp = /^\d\d\d\d\d\d-\d\d\d\d\d\d\d$/; 
+            // reExp = /^\d{6}-[1-4]\d{6}$/;
+
+            // reExp.test(value) ? alert('정상입력') : alert('잘못입력');
+
+            // 3단계 : 생년월일
+            /*
+                - 생년 : \d{2}
+                - 월(1-12월) : (0[1-9]|1[0-2])
+                - 일(31일) : (0[1-9]|1[0-9]|2[0-9]|3[0-1]) == (0[1-9]|[1-2][0-9]|3[0-1])
+            */
+            // const reExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
+
+            // reExp.test(value) ? alert('정상입력') : alert('잘못입력');
+
+
+            // 2월달만 7일까지
+            const month = value.substring(2, 4);
+            if(month == '02') {
+                reExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-7])-[1-4]\d{6}$/;
+
+                reExp.test(value) ? alert('정상입력') : alert('잘못입력');
+            }
+            else {
+                reExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]3[0-1])-[1-4]\d{6}$/;
+
+                reExp.test(value) ? alert('정상입력') : alert('잘못입력');
+            }
+        }
+    </script>
 </body>
 </html>

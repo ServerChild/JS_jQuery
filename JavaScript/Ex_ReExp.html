@@ -1,0 +1,50 @@
+<!-- * 정규표현식 문제 * -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규표현식 문제</title>
+</head>
+<body>
+    <form action="01. Outline.html">
+        아이디(ID) : <input name="userId" id="userid"> <br><br>
+        <!-- 비밀번호(PW) : <input type="password" name="userPw" id="userPw"> <br><br> -->
+        <!-- 비밀번호 확인 : <input type="password" name="userRePw" id="userRePw"> <br> -->
+        <input type="submit" onclick="return validate();">
+    </form>
+
+    <script>
+        function validate() {
+            // 아이디 : 첫글자는 영문자, 영문자 또는 숫자 포함, 4글자 이상 12글자 이하
+            const userId = document.querySelector('#userId').value;
+
+            let ReExp_Id = /^[a-z][a-z0-9]{3, 11}$/i;
+
+            if(ReExp_Id.test(userId)) {
+                alert('ID 형식이 틀립니다.');
+                return false;
+            }
+            else { alert('ID 입력 성공'); }
+
+            // // 비밀번호 : 영문자 또는 숫자로 시작, 중간에는 모든글자 가능, 9글자 이상 20글자 미만
+            // const userPw = document.getElementById('userPw').value;
+
+            // const ReExp_Pw = /^[a-z0-9].{7, 19}/i;
+
+            // // 비밀번호 = 비밀번화 확인 같은지 체크
+            // const userRePw = document.querySelector('#userRePw').value;
+
+            // ReExp_Id.test(userId) ? alert('ID 입력 성공') : alert('ID 형식이 틀립니다.');
+
+            // ReExp_Pw.test(userPw) ? alert('PW 입력 성공') : alert('PW 형식이 틀립니다.');
+
+            // if(userPw != userRePw) {
+            //     alert('비밀번호가 틀립니다.');
+            //     return false;
+            // }
+        }
+
+    </script>
+</body>
+</html>
