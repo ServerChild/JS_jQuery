@@ -7,11 +7,11 @@
     <title>정규표현식 문제</title>
 </head>
 <body>
-    <form action="01. Outline.html">
-        아이디(ID) : <input name="userId" id="userid"> <br><br>
-        <!-- 비밀번호(PW) : <input type="password" name="userPw" id="userPw"> <br><br> -->
-        <!-- 비밀번호 확인 : <input type="password" name="userRePw" id="userRePw"> <br> -->
-        <input type="submit" onclick="return validate();">
+    <form action="01. Outline.html" name="fo">
+        아이디(ID) : <input name="userId" id="userId"> <br><br>
+        비밀번호(PW) : <input type="password" name="userPw" id="userPw"> <br><br>
+        비밀번호 확인 : <input type="password" name="userRePw" id="userRePw"> <br>
+        <input type="submit" onclick=" return validate();">
     </form>
 
     <script>
@@ -19,29 +19,36 @@
             // 아이디 : 첫글자는 영문자, 영문자 또는 숫자 포함, 4글자 이상 12글자 이하
             const userId = document.querySelector('#userId').value;
 
-            let ReExp_Id = /^[a-z][a-z0-9]{3, 11}$/i;
+            let ReExp_Id = /^[a-z][a-z0-9]{4,12}$/i;
 
-            // ReExp_Id.test(userId) ? alert('ID 입력 성공') : alert('ID 형식이 틀립니다.');
-            if(ReExp_Id.test(userId)) {
+            // var flag = ReExp_Id.test(userId) ? alert('ID 입력 성공') : alert('ID 형식이 틀립니다.'); -> 안됨
+            // ReExp_Id.test(userId) ? alert('ID 입력 성공') : (false, alert('ID 형식이 틀립니다.')); -> 알림창은 뜨는데 링크가 넘어감
+            if(!ReExp_Id.test(userId)) {
                 alert('ID 형식이 틀립니다.');
                 return false;
             }
             else { alert('ID 입력 성공'); }
 
-            // // 비밀번호 : 영문자 또는 숫자로 시작, 중간에는 모든글자 가능, 9글자 이상 20글자 미만
-            // const userPw = document.getElementById('userPw').value;
+            // 비밀번호 : 영문자 또는 숫자로 시작, 중간에는 모든글자 가능, 9글자 이상 20글자 미만
+            const userPw = document.getElementById('userPw').value;
 
-            // const ReExp_Pw = /^[a-z0-9].{7, 19}/i;
+            const ReExp_Pw = /^[a-z0-9].{7,19}[a-z0-9]$/i;
 
             // ReExp_Pw.test(userPw) ? alert('PW 입력 성공') : alert('PW 형식이 틀립니다.');
+            if(!ReExp_Pw.test(userPw)) {
+                alert('PW 형식이 틀립니다.');
+                return false;
+            }
+            else { alert('PW 입력 성공'); }
 
-            // // 비밀번호 = 비밀번화 확인 같은지 체크
-            // const userRePw = document.querySelector('#userRePw').value;
+            // 비밀번호 = 비밀번화 확인 같은지 체크
+            const userRePw = document.querySelector('#userRePw').value;
 
-            // if(userPw != userRePw) {
-            //     alert('비밀번호가 틀립니다.');
-            //     return false;
-            // }
+            if(userPw != userRePw) {
+                alert('비밀번호가 틀립니다.');
+                document.fo.userRePw.focus();
+                return false;
+            }
         }
 
     </script>
