@@ -19,7 +19,8 @@
             // 아이디 : 첫글자는 영문자, 영문자 또는 숫자 포함, 4글자 이상 12글자 이하
             const userId = document.querySelector('#userId').value;
 
-            let ReExp_Id = /^[a-z][a-z0-9]{4,12}$/i;
+            // {} 안에 글자수는 앞에 오는 글자를 제외한 나머지 갯수를 적어줌
+            let ReExp_Id = /^[a-z][a-z0-9]{3,12}$/i;
 
             // var flag = ReExp_Id.test(userId) ? alert('ID 입력 성공') : alert('ID 형식이 틀립니다.'); -> 안됨
             // ReExp_Id.test(userId) ? alert('ID 입력 성공') : (false, alert('ID 형식이 틀립니다.')); -> 알림창은 뜨는데 링크가 넘어감
